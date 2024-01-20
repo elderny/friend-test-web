@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elderny's Friendship</title>
+    <style>
+        body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', 'Arial', sans-serif;
+    background: #FCE4EC; /* Soft pink background */
+}
+
+.scene {
+    padding: 2rem;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    border: 2px solid #F8BBD0; /* Soft border color */
+}
+
+.content {
+    text-align: center;
+}
+
+.message-box {
+    margin-bottom: 2rem;
+    padding: 20px;
+    background: #FFF3E0; /* Soft orange for the message box */
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #EC407A; /* Soft pink color for the text */
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #AD1457; /* Subtle text shadow */
+}
+
+.btn {
+    background-color: #4FC3F7; /* Soft blue for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 20px; /* Rounded buttons for a softer look */
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.btn:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.celebration-text {
+    font-size: 1.25rem;
+    color: #EC407A; /* Soft pink color for the text */
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+.confetti-container {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+
+.confetti-piece {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #4CAF50;
+    opacity: 0;
+    animation: confetti-fall 3s linear infinite;
+}
+
+/* Add animations for confetti pieces */
+@keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(300px) rotate(720deg); opacity: 0; }
+}
+
+.hidden {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="content">
+            <div class="message-box">
+                <h1>Will you be Elderny's friend?</h1>
+                <div class="button-container">
+                    <button id="yesBtn" class="btn">Yes, I'd love to!</button>
+                    <button id="noBtn" class="btn">I'm not sure</button>
+                </div>
+            </div>
+            <div id="friendshipMessage" class="hidden">
+                <p class="celebration-text">Fantastic! A new friendship is the beginning of many adventures!</p>
+                <div class="confetti-container"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // script.js
+document.addEventListener('DOMContentLoaded', function () {
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const friendshipMessage = document.getElementById('friendshipMessage');
+    const confettiContainer = document.querySelector('.confetti-container');
+
+    noBtn.addEventListener('mouseover', function () {
+        // Move the 'No' button away smoothly
+        noBtn.style.transform = `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`;
+        noBtn.style.transition = 'transform 0.3s ease-in-out';
+    });
+
+    yesBtn.addEventListener('click', function () {
+        // Fade in the friendship message
+        friendshipMessage.classList.remove('hidden');
+        friendshipMessage.style.opacity = 1;
+        friendshipMessage.style.transition = 'opacity 2s ease-in-out';
+
+        // Generate and animate confetti
+        createConfetti();
+    });
+
+    function createConfetti() {
+        const colors = ['#4CAF50', '#FFD700', '#FF8C00', '#FF69B4', '#6A5ACD'];
+        const numConfetti = 100;
+
+        for (let i = 0; i < numConfetti; i++) {
+            const confettiPiece = document.createElement('div');
+            confettiPiece.classList.add('confetti-piece');
+            confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confettiPiece.style.left = `${Math.random() * 100}%`;
+            confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
+            confettiPiece.style.animationDuration = `${Math.random() * 3 + 2}s`; // Between 2 and 5 seconds
+            confettiContainer.appendChild(confettiPiece);
+        }
+    }
+});
+
+    </script>
+</body>
+</html>
